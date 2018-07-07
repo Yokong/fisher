@@ -1,0 +1,10 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+.Python
+Pipfile.lock
+build/
+develop-eggs/
+dist/
+.vscode/

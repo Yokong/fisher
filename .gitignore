@@ -4,6 +4,7 @@ __pycache__/
 
 .Python
 Pipfile.lock
+.idea/
 build/
 develop-eggs/
 dist/

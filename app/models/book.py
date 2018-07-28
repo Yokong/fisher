@@ -1,9 +1,15 @@
 from sqlalchemy import Column, Integer, String
+from flask_sqlalchemy import SQLAlchemy
 
 
-class Book():
+db = SQLAlchemy()
+
+
+class Book(db.Model):
+    """book模型"""
+
     id = Column(Integer, primary_key=True, autoincrement=True)
-    title = Column(String(50), nullabel=False)
+    title = Column(String(50), nullable=False)
     author = Column(String(50), default='未知')
     bindging = Column(String(20))
     publisher = Column(String(50))

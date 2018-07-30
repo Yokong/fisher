@@ -1,13 +1,12 @@
 import json
 
-from flask import jsonify, Blueprint, request
+from flask import jsonify, Blueprint, request, render_template, flash
 
+from . import web
 from app.forms.book import SearchForm
 from app.libs.helper import is_isbn_or_key 
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookViewModel, BookCollection
-
-web = Blueprint('web', __name__)
 
 
 @web.route('/book/search')
@@ -24,8 +23,11 @@ def search():
         else:
             yushu_book.search_by_keyword(q, page)
         books.fill(yushu_book, q)
-        return json.dumps(books, default=lambda o: o.__dict__), 200, {
-            'content-type': 'application/json'
-        }
     else:
-        return jsonify({})
+        flash('无效的关键词')
+    return render_template('search_result.html', books=books)
+
+
+@web.route('/book/<isbn>/detail')
+def book_detail(isbn):
+    pass

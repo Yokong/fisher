@@ -9,6 +9,13 @@ class BookViewModel:
         self.summary = book['summary']
         self.pages = book['pages']
 
+    @property
+    def intro(self):
+        # intros = filter(lambda x: True if x else False,
+                        # [self.author, self.publisher, self.price])
+        intros = [' '.join(self.author), self.publisher, self.price]
+        return '/'.join(item for item in intros if item != '')
+
 
 class BookCollection:
 

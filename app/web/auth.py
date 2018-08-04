@@ -26,6 +26,10 @@ def login():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
             login_user(user)
+            next_url = request.args.get('next', '')
+            if not next_url or next_url.startswith('/'):
+                next_url = url_for('web.index')
+            return redirect(next_url)
         else:
             flash('账号不存在/密码错误')
     return render_template('auth/login.html', form=form)

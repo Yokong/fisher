@@ -11,7 +11,7 @@ class User(Base):
 	email = Column(String(50), unique=True, nullable=False)
 	confirmed = Column(Boolean, default=False)
 	beans = Column(Integer, default=0)
-	_password = Column('password', String(64))
+	_password = Column('password', String(128))
 	send_counter = Column(Integer, default=0)
 	receive_counter = Column(Integer, default=0)
 	wx_open_id = Column(String(50))

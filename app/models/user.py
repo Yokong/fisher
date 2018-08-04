@@ -1,10 +1,11 @@
 from sqlalchemy import Column, Integer, String, Boolean, Float
+from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from .base import Base
 
 
-class User(Base):
+class User(UserMixin, Base):
 	id = Column(Integer, primary_key=True)
 	nickname = Column(String(24), nullable=False)
 	phone_number = Column(String(18), unique=True)

@@ -1,4 +1,5 @@
 from flask import render_template, request, redirect, url_for, flash
+from flask_login import login_user
 
 from . import web
 from app.forms.auth import RegisterForm, LoginForm
@@ -24,10 +25,10 @@ def login():
     if request.method == 'POST' and form.validate():
         user = User.query.filter_by(email=form.email.data).first()
         if user and user.check_password(form.password.data):
-            pass
+            login_user(user)
         else:
             flash('账号不存在/密码错误')
-    pass
+    return render_template('auth/login.html', form=form)
 
 
 @web.route('/reset/password', methods=['GET', 'POST'])

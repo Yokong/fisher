@@ -1,9 +1,9 @@
 from sqlalchemy import Column, Integer, String
 
-from .base import db
+from .base import Base
 
 
-class Book(db.Model):
+class Book(Base):
     """book模型"""
 
     id = Column(Integer, primary_key=True, autoincrement=True)

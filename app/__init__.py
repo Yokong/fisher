@@ -1,6 +1,6 @@
 from flask import Flask
 
-from .models.book import db
+from .models.base import db
 
 
 def create_app():

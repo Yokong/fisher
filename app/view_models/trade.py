@@ -9,8 +9,12 @@ class TradeInfo:
         self.trades = (self.__map_to_trade(single) for single in goods)
 
     def __map_to_trade(self, single):
+        if single.create_time:
+            time = single.create_datetime.strftime('%Y-%m-%d')
+        else:
+            time = '未知'
         return dict(
             user_name=single.user.nickname,
-            time=single.create_time.strftime('%Y-%m-%d'),
+            time=time,
             id=single.id
         )

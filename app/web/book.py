@@ -7,6 +7,8 @@ from app.forms.book import SearchForm
 from app.libs.helper import is_isbn_or_key 
 from app.spider.yushu_book import YuShuBook
 from app.view_models.book import BookViewModel, BookCollection
+from app.models.gift import Gift
+from app.models.wish import Wish
 
 
 @web.route('/book/search')
@@ -30,7 +32,14 @@ def search():
 
 @web.route('/book/<isbn>/detail')
 def book_detail(isbn):
+    has_in_gifts = False
+    has_in_wishes = False
+
     yushu_book = YuShuBook()
     yushu_book.search_by_isbn(isbn)
     book = BookViewModel(yushu_book.first)
+
+    trade_gifts = Gift.query.filter_by(isbn=isbn, launched=False).all()
+    trade_wishes = Wish.query.filter_by(isbn=isbn, launched=False).all()
+
     return render_template('book_detail.html', book=book, wishes=[], gifts=[])
